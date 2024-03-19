@@ -18,8 +18,8 @@ public class ClasePrincipal {
         ClienteVipDAO elClienteVip = contexto.getBean("clienteVipDAO", ClienteVipDAO.class);
 
         //llamar al método
-
-        elCliente.insertaClientes(); //este es el método que debe coincidir con lo que va dentro de la anotacion @Before
+        Cliente cl1= new Cliente();
+        elCliente.insertaClientes(cl1, "Normal"); //este es el método que debe coincidir con lo que va dentro de la anotacion @Before
 
         elClienteVip.insertaClientes(); //este es el método que debe coincidir con lo que va dentro de la anotacion @Before
 
