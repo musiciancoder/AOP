@@ -14,6 +14,7 @@ public class ClienteDAO {
 
     }
 
+    /*
     public String getValoracionClienteNormal() {
         System.out.println("Obteniendo valoracion del cliente");
         return valoracionClienteNormal;
@@ -33,4 +34,6 @@ public class ClienteDAO {
         System.out.println("Estableciendo codigo del cliente");
         this.codigoClienteNormal = codigoClienteNormal;
     }
+
+     */
 }

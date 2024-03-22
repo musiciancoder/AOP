@@ -3,16 +3,19 @@ package es.pildoras.gestionPOA.aop.aspectos;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
+@Order(2)
 public class LoginConAspecto { //este es el aspecto
 
   //  @Pointcut("execution(public * insertarClientes*(..))"){} //este pointcut expression es el que se reutilizará
     @Pointcut("execution(* es.pildoras.gestionPOA.aop.dao.*.*(..))") //con esto decimos q el aspecto se ejecute sobre cualquier metodo (incluidos metodos getters y setters) de este paquete con cualquier numero de argumentos
-    private void paraClientes(){}
+    public void paraClientes(){}
 
+  /*
     //Pointcut para getters
     @Pointcut("execution(* es.pildoras.gestionPOA.aop.dao.*.get*(..))") //Con esto el aspecto actuará solo cuando ejecutamos un getter
     private void paraGetters(){}
@@ -21,12 +24,14 @@ public class LoginConAspecto { //este es el aspecto
     @Pointcut("execution(* es.pildoras.gestionPOA.aop.dao.*.set*(..))") //Con esto el aspecto actuará solo cuando ejecutamos un setter
     private void paraSetters(){}
 
+
+
     //Combinacion de pointcuts
    // @Pointcut("paraClientes() && !(paraGetters() || paraSetters())") //dentro del paquete menos getters ni setters
     //private void paqueteExceptoGetterSetter(){}
     @Pointcut("paraClientes() && !paraSetters()") //dentro del paquete menos setters
     private void paqueteExceptoSetter(){}
-
+*/
 
     //notar que como pusimos ClienteVipDao en el @Before solo se ejecuta el aspecto de ClienteVipDao. Sino, se ejecutarian ambos aspectos, el de ClienteDao y el de ClienteVipDAO
  //Los before de aca hacia abajo son "pointcut expressions"
@@ -44,12 +49,6 @@ public class LoginConAspecto { //este es el aspecto
         System.out.println("El usuario esta logueado");
         System.out.println("El perfil para insertar clientes es correcto");
     }
-    @Before("paraClientes()")
-    public void requisitosCliente() {
-        System.out.println("El cliente cumple los requisitos para ser insertado en la BBDD");
-    }
-    @Before("paraClientes()")
-    public void requisitosTabla() {
-        System.out.println("Hay menos de 3000 registros en la tabla. Puedes insertar");
-    }
+
+
 }

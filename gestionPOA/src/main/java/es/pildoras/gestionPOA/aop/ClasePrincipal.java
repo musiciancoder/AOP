@@ -26,11 +26,11 @@ public class ClasePrincipal {
         //cerrar el contexto
         contexto.close();
 
-        elCliente.setCodigoClienteNormal("547475");
+/*        elCliente.setCodigoClienteNormal("547475");
         elCliente.setValoracionClienteNormal("positiva");
 
         String codigoCl = elCliente.getCodigoClienteNormal();
-        String valoraCl = elCliente.getValoracionClienteNormal();
+        String valoraCl = elCliente.getValoracionClienteNormal();*/
 
     }
 }
