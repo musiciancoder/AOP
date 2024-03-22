@@ -1,5 +1,7 @@
 package es.pildoras.gestionPOA.aop.aspectos;
 
+import es.pildoras.gestionPOA.aop.Cliente;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -14,6 +16,7 @@ public class LoginConAspecto { //este es el aspecto
   //  @Pointcut("execution(public * insertarClientes*(..))"){} //este pointcut expression es el que se reutilizará
     @Pointcut("execution(* es.pildoras.gestionPOA.aop.dao.*.*(..))") //con esto decimos q el aspecto se ejecute sobre cualquier metodo (incluidos metodos getters y setters) de este paquete con cualquier numero de argumentos
     public void paraClientes(){}
+
 
   /*
     //Pointcut para getters
@@ -44,10 +47,20 @@ public class LoginConAspecto { //este es el aspecto
    // @Before("paraGetters()") //solo ejecuta el aspecto para los getters
    // @Before("paraSetters()") //solo ejecuta el aspecto para los setters
     //@Before("paqueteExceptoGetterSetter") //ejecuta todos menos getters ni setters
-    @Before("paqueteExceptoSetter") //ejecuta todos menos setters
-    public void antesInsertarCliente(){
+  //  @Before("paqueteExceptoSetter") //ejecuta todos menos setters
+    @Before("paraClientes()")
+    public void antesInsertarCliente(JoinPoint miJoin){ //Con el joinpoint podemos rescatar parametros del método que desencadena el aspecto, en nuestro caso insertaClientes()
         System.out.println("El usuario esta logueado");
         System.out.println("El perfil para insertar clientes es correcto");
+        Object[] argumentos=miJoin.getArgs();//Con esto y las siguientes lineas rescatamos parametros del insertaClientes()
+        for (Object temp:
+             argumentos) {
+            if(temp instanceof Cliente) {
+                Cliente elCliente = (Cliente)temp;
+                System.out.println("Nombre del cliente: " + elCliente.getNombre());
+                System.out.println("Tipo del cliente: " + elCliente.getTipo());
+            }
+        }
     }
 
 

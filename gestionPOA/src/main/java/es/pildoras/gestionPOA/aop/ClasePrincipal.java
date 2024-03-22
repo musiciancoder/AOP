@@ -19,7 +19,12 @@ public class ClasePrincipal {
 
         //llamar al método
         Cliente cl1= new Cliente();
-        elCliente.insertaClientes(cl1, "Normal"); //este es el método que debe coincidir con lo que va dentro de la anotacion @Before
+
+        cl1.setNombre("Juan Diaz");
+
+        cl1.setTipo("Normal");
+
+        elCliente.insertaClientes(cl1, cl1.getTipo()); //este es el método que debe coincidir con lo que va dentro de la anotacion @Before
 
         elClienteVip.insertaClientes(); //este es el método que debe coincidir con lo que va dentro de la anotacion @Before
 
