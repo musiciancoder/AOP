@@ -30,6 +30,13 @@ public class LoginConAspecto { //este es el aspecto
 
     }
 
+    //esto se ejecuta cuando se lanza la excepcion o bien si no se lanza (equivalente al finally)
+    @After("execution(*es.pildoras.gestionPOA.dao.encuentraClientes(..)")
+    public void ejecutandoTareasConYSinExcepcion(JoinPoint elpoint){
+        System.out.println("Ejecutando tareas siempre!!");
+    }
+
+
     private void procesadoDatosAfterReturning(List<Cliente>listaDeClientes){
         for (Cliente cl:
              listaDeClientes) {
