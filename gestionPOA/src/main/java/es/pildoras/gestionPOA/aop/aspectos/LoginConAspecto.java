@@ -2,16 +2,28 @@ package es.pildoras.gestionPOA.aop.aspectos;
 
 import es.pildoras.gestionPOA.aop.Cliente;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Aspect
 @Component
 @Order(2)
 public class LoginConAspecto { //este es el aspecto
+
+    @AfterReturning(pointcut = "execution(*es.pildoras.gestionPOA.dao.encuentraClientes(..)",returning="listaDeClientes") //para que se ejecute (o sea que me diga si existen clientes VIP en el listado) este aspecto despues de la ejecucion del metodo encuentraClientes()
+    public void tareaTrasEncontrarCliente(List<Cliente> listaDeClientes){
+        for (Cliente cl:listaDeClientes
+             ) {
+            if(cl.getTipo()=="VIP") System.out.println("Existen clientes VIP en el listado");
+            System.out.println("Existen clientes VIP en el listado. Nombre: " + cl.getNombre());
+        }
+    }
 
   //  @Pointcut("execution(public * insertarClientes*(..))"){} //este pointcut expression es el que se reutilizará
     @Pointcut("execution(* es.pildoras.gestionPOA.aop.dao.*.*(..))") //con esto decimos q el aspecto se ejecute sobre cualquier metodo (incluidos metodos getters y setters) de este paquete con cualquier numero de argumentos
