@@ -3,5 +3,8 @@ What is an aspect?-->It is a Crosscutting concern (funcionalidad transversal) fo
 Generally speaking an aspect encapsulate the logic for this crosscutting concern, so that it can be reusable over the app.
 We need AspectWeaver dependency in order to use aspectj with spring.
 Proyecto GestionPOA-->solo con fines didacticos, no esta para correrlo! Esta en mi GitHub.
-Pointcut expression-->name convention within @Before so that certain aspects can be executed in a selective fashion
+Pointcut expression-->name convention within @Before, @AfterReturning, @After, etc. so that certain aspects can be executed in a selective fashion
+    @Before("paraClientes()")
+    public void antesInsertarCliente(JoinPoint miJoin){
+}	//Con el joinpoint podemos rescatar parametros del método que desencadena el aspecto, en nuestro caso insertaClientes()
 @Order-->cuales aspectos se ejecutan antes y cuales despues
