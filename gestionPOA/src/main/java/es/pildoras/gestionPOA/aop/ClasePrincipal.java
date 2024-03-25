@@ -15,7 +15,13 @@ public class ClasePrincipal {
         //Obtener el bean desde el contenedor
         ClienteDAO elCliente = contexto.getBean("clienteDAO", ClienteDAO.class);
 
-        elCliente.encuentraClientes();
+        try {
+            boolean miParam=true;
+            elCliente.encuentraClientes(miParam);
+        } catch (Exception miEx) {
+            System.out.println("Excepcion lanzada desde clase principal");
+            System.out.println(miEx.getMessage());
+        }
 
         System.out.println("Aqui continuaria la ejecucion del programa");
         /*

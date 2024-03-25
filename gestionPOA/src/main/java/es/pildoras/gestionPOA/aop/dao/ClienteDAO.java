@@ -17,7 +17,10 @@ public class ClienteDAO {
 
     }
 
-    public List<Cliente> encuentraClientes(){
+    public List<Cliente> encuentraClientes(boolean miParam){
+
+        //para que lance excepcion
+        if(miParam)throw  new RuntimeException("Erros!! No se ha podido procesar la info");
 
         List<Cliente> listaClientes = new ArrayList<>();
         //simular clientes devueltos por la BBDD

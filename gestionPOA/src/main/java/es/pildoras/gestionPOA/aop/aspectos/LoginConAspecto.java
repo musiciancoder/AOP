@@ -2,10 +2,7 @@ package es.pildoras.gestionPOA.aop.aspectos;
 
 import es.pildoras.gestionPOA.aop.Cliente;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +21,13 @@ public class LoginConAspecto { //este es el aspecto
             this.procesadoDatosAfterReturning(listaDeClientes);
             // System.out.println("Existen clientes VIP en el listado. Nombre: " + cl.getNombre());
         }
+    }
+
+    //esto se ejecuta cuando se lanza la excepcion
+    @AfterThrowing(pointcut = "execution(*es.pildoras.gestionPOA.dao.encuentraClientes(..)",throwing = "LaExcepcion")
+    public void procesandoDatosAfterExceptionEncuentraClientes(Throwable LaExcepcion){
+        System.out.println("Aqui se estaria ejecutando de forma automatica las tareas tras la excepcion");
+
     }
 
     private void procesadoDatosAfterReturning(List<Cliente>listaDeClientes){
