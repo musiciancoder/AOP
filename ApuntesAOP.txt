@@ -1,6 +1,7 @@
+Se recomienda encarecidamente ver el código de cada video correspondiente a cada commit, ya que sino el código se enreda mucho
 What is an aspect?-->It is a Crosscutting concern (funcionalidad transversal) for Security, Profiling Logging, Transactions Management, etc present over many architecture layers simultaneously (for example UI, Business Logic and Data Access).
 Generally speaking an aspect encapsulate the logic for this crosscutting concern, so that it can be reusable over the app.
 We need AspectWeaver dependency in order to use aspectj with spring.
 Proyecto GestionPOA-->solo con fines didacticos, no esta para correrlo! Esta en mi GitHub.
 Pointcut expression-->name convention within @Before so that certain aspects can be executed in a selective fashion
- 
+@Order-->cuales aspectos se ejecutan antes y cuales despues
