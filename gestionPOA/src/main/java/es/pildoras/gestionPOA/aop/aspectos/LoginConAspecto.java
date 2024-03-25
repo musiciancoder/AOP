@@ -2,6 +2,7 @@ package es.pildoras.gestionPOA.aop.aspectos;
 
 import es.pildoras.gestionPOA.aop.Cliente;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,19 @@ import java.util.List;
 @Component
 @Order(2)
 public class LoginConAspecto { //este es el aspecto
+
+//Ejemplos de utilidad del Around:Logging y seguridad,Pre-procesado y post-procesado, Labores de auditoría (medicion de tiempos)
+    @Around("execution(*es.pildoras.gestionPOA.dao.aop.getServicio(..)")     //Metodo q ejecuta tareas antes y despues de ejecutarse el metodo (el metodo es getServicio() en nuestro caso)
+    public Object ejecutarServicio(ProceedingJoinPoint elPoint) throws Throwable{
+        System.out.println("******Comienzo de acciones antes de llamada*******");
+        Long comienzo=System.currentTimeMillis();//para medir en segundos
+        Object resultado = elPoint.proceed(); //elPoint apunta al metodo destino (en nuestro caso getServicio())
+        System.out.println("*************tareas despues de llamada*************");
+        Long fin=System.currentTimeMillis();
+        Long duracion = fin -comienzo;
+        System.out.println("El metodo tardó: " + duracion/1000 + " segundos");
+        return resultado;
+    }
 
     @AfterReturning(pointcut = "execution(*es.pildoras.gestionPOA.dao.encuentraClientes(..)",returning="listaDeClientes") //para que se ejecute (o sea que me diga si existen clientes VIP en el listado) este aspecto despues de la ejecucion del metodo encuentraClientes()
     public void tareaTrasEncontrarCliente(List<Cliente> listaDeClientes){

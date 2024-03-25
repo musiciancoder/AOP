@@ -2,6 +2,7 @@ package es.pildoras.gestionPOA.aop;
 
 import es.pildoras.gestionPOA.aop.dao.ClienteDAO;
 import es.pildoras.gestionPOA.aop.dao.ClienteVipDAO;
+import es.pildoras.gestionPOA.aop.servicios.MedicionServicio;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ClasePrincipal {
@@ -12,7 +13,7 @@ public class ClasePrincipal {
         AnnotationConfigApplicationContext contexto = new AnnotationConfigApplicationContext(Configuracion.class);
 
 
-        //Obtener el bean desde el contenedor
+/*        //Obtener el bean desde el contenedor
         ClienteDAO elCliente = contexto.getBean("clienteDAO", ClienteDAO.class);
 
         try {
@@ -23,7 +24,9 @@ public class ClasePrincipal {
             System.out.println(miEx.getMessage());
         }
 
+
         System.out.println("Aqui continuaria la ejecucion del programa");
+ */
         /*
         ClienteVipDAO elClienteVip = contexto.getBean("clienteVipDAO", ClienteVipDAO.class);
 
@@ -39,6 +42,12 @@ public class ClasePrincipal {
         elClienteVip.insertaClientes(); //este es el método que debe coincidir con lo que va dentro de la anotacion @Before
 
          */
+
+        //Para que funcione @Around
+        MedicionServicio elServicio=contexto.getBean("medicionServicio",MedicionServicio.class);
+        System.out.println("Llamando al método getServicio()");
+        String datos = elServicio.getServicio();
+        System.out.println("Devolucion del metodo: " + datos);
 
         //cerrar el contexto
         contexto.close();
