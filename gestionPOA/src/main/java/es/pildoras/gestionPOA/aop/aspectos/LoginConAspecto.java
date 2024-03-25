@@ -21,7 +21,16 @@ public class LoginConAspecto { //este es el aspecto
         for (Cliente cl:listaDeClientes
              ) {
             if(cl.getTipo()=="VIP") System.out.println("Existen clientes VIP en el listado");
-            System.out.println("Existen clientes VIP en el listado. Nombre: " + cl.getNombre());
+            this.procesadoDatosAfterReturning(listaDeClientes);
+            // System.out.println("Existen clientes VIP en el listado. Nombre: " + cl.getNombre());
+        }
+    }
+
+    private void procesadoDatosAfterReturning(List<Cliente>listaDeClientes){
+        for (Cliente cl:
+             listaDeClientes) {
+            String datosProcesados="V.I.P." + cl.getNombre().toUpperCase();
+            cl.setNombre(datosProcesados);
         }
     }
 
